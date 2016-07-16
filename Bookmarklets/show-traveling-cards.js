@@ -44,6 +44,9 @@ new_style.innerHTML = ' \
 .cardId { \
     font-family: Courier,monospace; \
 } \
+.cardExpired { \
+    background-color:#ffebeb; \
+} \
 .zoomFlag { \
     zoom: 120%; \
 } \
@@ -57,7 +60,7 @@ var cardInfoTemplate = ' \
   <div class="cardInfoWrapper"> \
       <div class="cardInfo"> \
         <b class="cardId">%CARDID%</b> \
-        • %TRAVELED% \
+        • <span class="cardTraveled">%TRAVELED%</span> \
         • %USER% \
         • %COUNTRY_FLAG%&nbsp;%COUNTRY% \
       </div> \
@@ -117,6 +120,7 @@ $(document).ajaxStop(function () {
                 POSTCARD: window.src[i]
             })
     );
+    $(".cardTraveled:contains('expired')").addClass("cardExpired");
 });
 
 // ========================================================
