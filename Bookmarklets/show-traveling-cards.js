@@ -31,11 +31,12 @@ new_style.innerHTML = ' \
     text-align:center; \
     margin:0; \
     background-color:#fff; \
+    color:#3475b9; \
 } \
 .cardInfo { \
     display: inline-block; \
     white-space: nowrap; \
-    font-family: "Lucida Grande",Helvetica,Arial,sans-serif; \
+    font-family: \'Lucida Grande\',Helvetica,Arial,sans-serif; \
     font-size:1.5em; \
     overflow-x:hidden; \
     overflow-y:hidden; \
@@ -56,13 +57,13 @@ document.getElementsByTagName('head')[0].appendChild(new_style);
 // ---------------------------------------------
 
 var cardInfoTemplate = ' \
-<div class="cardContainer"> \
-  <div class="cardInfoWrapper"> \
-      <div class="cardInfo"> \
-        <b class="cardId">%CARDID%</b> \
-        • <span class="cardTraveled">%TRAVELED%</span> \
-        • %USER% \
-        • %COUNTRY_FLAG%&nbsp;%COUNTRY% \
+<div class=\'cardContainer\'> \
+  <div class=\'cardInfoWrapper\'> \
+      <div class=\'cardInfo\'> \
+        <b class=\'cardId\'>%CARDID%</b> \
+        <span style=\'color:#000\'>&#8226;</span> <span class=\'cardTraveled\'>%TRAVELED%</span> \
+        <span style=\'color:#000\'>&#8226;</span> %USER% \
+        <span style=\'color:#000\'>&#8226;</span> %COUNTRY_FLAG%&nbsp;%COUNTRY% \
       </div> \
   </div> \
   %POSTCARD% \
@@ -83,27 +84,27 @@ var id = [],
 
 window.src = {};    // is global, so we can accesss it from asynch functions
 
-$( "#postcardTable > tbody > tr" ).each(function() {
-    id.push($(this).find("td:nth-child(1) > a").text());
-    to_member.push($(this).find("td:nth-child(2) > a").text());
-    to_country.push($(this).find("td:nth-child(3) > a").text());
-    to_country_code.push($(this).find("td:nth-child(3) > a").attr("href").match(/\w\w$/));
-    to_country_flag_img.push($(this).find("td:nth-child(3) > img").addClass("zoomFlag").prop('outerHTML'));
-    sent_date.push($(this).find("td:nth-child(4)").text());
-    travel_days.push($(this).find("td:nth-child(5)").text());
-    img_link.push($(this).find("td:nth-child(6) > a"));
+$('#postcardTable > tbody > tr').each(function() {
+    id.push($(this).find('td:nth-child(1) > a').text());
+    to_member.push($(this).find('td:nth-child(2) > a').text());
+    to_country.push($(this).find('td:nth-child(3) > a').text());
+    to_country_code.push($(this).find('td:nth-child(3) > a').attr('href').match(/\w\w$/));
+    to_country_flag_img.push($(this).find('td:nth-child(3) > img').addClass('zoomFlag').prop('outerHTML'));
+    sent_date.push($(this).find('td:nth-child(4)').text());
+    travel_days.push($(this).find('td:nth-child(5)').text());
+    img_link.push($(this).find('td:nth-child(6) > a'));
 });
 
 // called for each $.get(), as they finish
 $(document).ajaxComplete(function(event, xhr, settings) {
     var n = getURLParameter(settings.url, 'num');
     var response = $('<html />').html(xhr.responseText);
-    var source = response.find("img");
+    var source = response.find('img');
     window.src[n] = source[0].outerHTML;
 });
 
 for (var i = 0; i < img_link.length; i++) {
-    $.get(img_link[i].attr("href"), {num:i});
+    $.get(img_link[i].attr('href'), {num:i});
 }
 
 // called when all ajax requests are done
@@ -120,7 +121,7 @@ $(document).ajaxStop(function () {
                 POSTCARD: window.src[i]
             })
     );
-    $(".cardTraveled:contains('expired')").addClass("cardExpired");
+    $('.cardTraveled:contains(\'expired\')').addClass('cardExpired');
 });
 
 // ========================================================
