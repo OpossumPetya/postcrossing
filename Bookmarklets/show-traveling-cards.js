@@ -95,7 +95,7 @@ $('#postcardTable > tbody > tr').each(function() {
     img_link.push($(this).find('td:nth-child(6) > a'));
 });
 
-// called for each $.get(), as they finish
+// this gets called for each $.get(), as they finish downloading content
 $(document).ajaxComplete(function(event, xhr, settings) {
     var n = getURLParameter(settings.url, 'num');
     var response = $('<html />').html(xhr.responseText);
@@ -107,7 +107,7 @@ for (var i = 0; i < img_link.length; i++) {
     $.get(img_link[i].attr('href'), {num:i});
 }
 
-// called when all ajax requests are done
+// this gets called when all ajax requests are done
 $(document).ajaxStop(function () {
     $('#postcardTable_wrapper').empty();
     for (var i = 0; i < id.length; i++)
