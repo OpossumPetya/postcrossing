@@ -80,6 +80,14 @@ var cardInfoTemplate = ' \
 // get available columns
 var column = {};
 $('.dataTables_scrollHead th').each(function(key, value) {
+    // Can be either To Member/Country, or From Member/Country
+    if (/member/i.test($(this).text()))
+        column['Member'] = key + 1; // css selectors are 1-based
+    else if (/country/i.test($(this).text()))
+        column['Country'] = key + 1;
+    else
+        column[$(this).text()] = key + 1;
+});
 
 var id = [],
     to_member = [],
