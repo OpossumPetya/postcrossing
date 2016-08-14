@@ -9,7 +9,7 @@ function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function next_random_postcard() {
+window.next_random_postcard = function() {
     $('#postcardTable_wrapper').empty();
     // get random gallery page
     $.get('https://www.postcrossing.com/gallery/' + randomInt(1,MAX_GALLERY_PAGE), function(data) {
