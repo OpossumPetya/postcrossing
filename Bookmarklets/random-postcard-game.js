@@ -20,7 +20,7 @@ window.next_random_postcard = function() {
         // get URLs of all images
         var img_source = gallery_page_obj.find("ul.postcardImageList li a:last-child").map( function() { return $(this).attr('href'); }).get();
         // get random image page (from the gallery page retrieved above)
-        $.get(location.origin + img_source[randomInt(1,img_source.length)], function(data) {
+        $.get(location.origin + img_source[randomInt(0,img_source.length-1)], function(data) {
             var postcard_page_obj = $('<html />').html(data).find("#postcardControls");
             postcard_page_obj.find("td:nth-child(2)").empty(); // remove social media links
             // ... and add "refresh" icon

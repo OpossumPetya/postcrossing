@@ -6,7 +6,7 @@ Simple tutorial:
 http://code.tutsplus.com/tutorials/create-bookmarklets-the-right-way--net-18154
 
 Bookmarkleter:
-http://chriszarate.github.io/bookmarkleter/ (check all boxes)
+http://chriszarate.github.io/bookmarkleter/ (URL encode + minify)
 
 Another Bookmarkleter:
 http://mrcoles.com/bookmarklet/
