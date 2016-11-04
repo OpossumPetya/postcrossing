@@ -17,14 +17,18 @@ window.next_random_postcard = function() {
     // get random gallery page
     $.get('https://www.postcrossing.com/gallery/' + randomInt(1,MAX_GALLERY_PAGE), function(data) {
         var gallery_page_obj = $('<html />').html(data);
-        // get URLs of all images
+        // get URLs of all images on the selected page
         var img_source = gallery_page_obj.find("ul.postcardImageList li a:last-child").map( function() { return $(this).attr('href'); }).get();
-        // get random image page (from the gallery page retrieved above)
-        $.get(location.origin + img_source[randomInt(0,img_source.length-1)], function(data) {
+        // get random image (from the gallery page retrieved above)
+        var random_image = img_source[randomInt(0,img_source.length-1)];
+        var random_image_url = location.origin + random_image;
+        var random_image_id = random_image.match(/\w+\-\d+/);
+        $.get(random_image_url, function(data) {
             var postcard_page_obj = $('<html />').html(data).find("#postcardControls");
             postcard_page_obj.find("td:nth-child(2)").empty(); // remove social media links
             // ... and add "refresh" icon
-            postcard_page_obj.find("td:nth-child(2)").append("<a class='prevnext' title='Show another random postcard' href='javascript:next_random_postcard();'>next</a>");
+            postcard_page_obj.find("td:nth-child(2)").append("<b><a title='Show another random postcard' href='javascript:next_random_postcard();'>next</a></b>");
+            postcard_page_obj.find("tbody").append("<tr><td colspan='2' style='margin:0;padding:0;text-align:center;'><a href='"+random_image_url+"'>["+random_image_id+"]</a></td></tr>");
             $("#mainContentArea").empty().append(postcard_page_obj);
         });
     });
