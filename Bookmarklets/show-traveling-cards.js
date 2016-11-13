@@ -108,7 +108,7 @@ $('#postcardTable > tbody > tr').each(function() {
     if (column['Country']) {
         to_country.push($(this).find('td:nth-child('+column['Country']+') > a').text());
         to_country_code.push($(this).find('td:nth-child('+column['Country']+') > a').attr('href').match(/\w\w$/));
-        to_country_flag_img.push($(this).find('td:nth-child('+column['Country']+') > img').addClass('zoomFlag').prop('outerHTML'));
+        to_country_flag_img.push($(this).find('td:nth-child('+column['Country']+') > i').addClass('zoomFlag').prop('outerHTML'));
     }
     if (column['Sent'])
         sent_date.push($(this).find('td:nth-child('+column['Sent']+')').text());
