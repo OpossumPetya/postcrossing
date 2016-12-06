@@ -13,7 +13,7 @@ function randomInt(min, max) {
 }
 
 window.next_random_postcard = function() {
-    $('#mainContentArea').empty().append("<img alt='Loading random postcard...' title='Loading random postcard...' src='//static1.postcrossing.com/images/indicator.gif' />");
+    $('#mainContentArea').empty().append("<div style='text-align:center;'><span id='sendingIndicator' class='loading-indicator' style='display:block;'><i></i><i></i></span></div>");
     // get random gallery page
     $.get('https://www.postcrossing.com/gallery/' + randomInt(1,MAX_GALLERY_PAGE), function(data) {
         var gallery_page_obj = $('<html />').html(data);
