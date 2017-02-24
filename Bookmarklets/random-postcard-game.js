@@ -24,12 +24,17 @@ window.next_random_postcard = function() {
         var random_image_url = location.origin + random_image;
         var random_image_id = random_image.match(/\w+\-\d+/);
         $.get(random_image_url, function(data) {
-            var postcard_page_obj = $('<html />').html(data).find("#postcardControls");
-            postcard_page_obj.find("td:nth-child(2)").empty(); // remove social media links
-            // ... and add "refresh" icon
-            postcard_page_obj.find("td:nth-child(2)").append("<b><a title='Show another random postcard' href='javascript:next_random_postcard();'>next</a></b>");
-            postcard_page_obj.find("tbody").append("<tr><td colspan='2' style='margin:0;padding:0;text-align:center;'><a href='"+random_image_url+"'>["+random_image_id+"]</a></td></tr>");
-            $("#mainContentArea").empty().append(postcard_page_obj);
+            var postcard_page_obj = $('<html />').html(data).find("img[class*='postcard-image']");
+            var white_div = $.parseHTML("<div id='showBox' style='background-color:white;text-align:center;clear:both;'></div>");
+            $("#mainContentArea").empty().append(white_div);
+            $("#showBox")
+                 // "next" postcard link
+                .append("<b><a title='Show another random postcard' href='javascript:next_random_postcard();'>next</a></b>")
+                 // current postcard inage
+                .append(postcard_page_obj)
+                 // link to the current postcard page
+                .append("<a href='"+random_image_url+"'>["+random_image_id+"]</a>")
+                ;
         });
     });
 }
