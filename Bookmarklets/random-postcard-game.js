@@ -1,10 +1,9 @@
 javascript:(function(){
 // ========================================================
 
-// Execute from Traveling Postcards page
-
+// not all pages have jQuery loaded
 if (!window.jQuery)
-    $("#mainContentArea").prepend("<div class='success'><b>Try running this from traveling postcards page!</b></div>");
+    alert("Try running this another page, for example sent postcards pages! (required software library is not used on this page)");
 
 var MAX_GALLERY_PAGE = 62500;
 
